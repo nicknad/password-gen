@@ -10,7 +10,8 @@ pub fn main() !void {
     const stdout_file = std.io.getStdOut().writer();
     var bw = std.io.bufferedWriter(stdout_file);
     const stdout = bw.writer();
-    var prng = std.Random.DefaultPrng.init(932024);
+    const x: u64 = std.zig.c_translation.cast(u64, std.time.nanoTimestamp());
+    var prng = std.Random.DefaultPrng.init(x);
     const rand = prng.random();
 
     try stdout.print("Passsword: \n", .{});
